@@ -841,18 +841,6 @@ pub mod easing {
     }
 }
 
-// #[derive(Debug)]
-// pub struct MutableSpringAnimationSignal(MutableSignal<Percentage>);
-
-// impl Signal for MutableSpringAnimationSignal {
-//     type Item = Percentage;
-
-//     #[inline]
-//     fn poll_change(mut self: Pin<&mut Self>, waker: &LocalWaker) -> Poll<Option<Self::Item>> {
-//         self.0.poll_change_unpin(waker)
-//     }
-// }
-
 struct MutableSpringAnimationState {
     playing: bool,
     end: Percentage,
