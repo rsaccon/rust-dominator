@@ -18,7 +18,6 @@ macro_rules! builder {
     };
 }
 
-
 #[macro_export]
 macro_rules! html {
     ($($args:tt)+) => {
@@ -26,14 +25,12 @@ macro_rules! html {
     };
 }
 
-
 #[macro_export]
 macro_rules! svg {
     ($($args:tt)+) => {
         builder!($crate::SVG_NAMESPACE, $crate::SvgElement, $($args)+)
     };
 }
-
 
 #[macro_export]
 macro_rules! stylesheet {
@@ -45,14 +42,15 @@ macro_rules! stylesheet {
     };
 }
 
-
 #[macro_export]
 macro_rules! class {
     ($(.$name:ident($($args:expr),*))*) => {
-        $crate::ClassBuilder::new()$(.$name($($args),*))*.done()
+        $crate::ClassBuilder::new(None)$(.$name($($args),*))*.done()
+    };
+    ($rule:expr, { $(.$name:ident($($args:expr),*))* }) => {
+        $crate::ClassBuilder::new(Some($rule))$(.$name($($args),*))*.done()
     };
 }
-
 
 // TODO this is pretty inefficient, it iterates over the token tree one token at a time
 #[doc(hidden)]
